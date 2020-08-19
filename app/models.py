@@ -12,3 +12,5 @@ class Contact(db.Model):
     def __repr__(self):
         return f'<Contact {self.last_name}, {self.first_name}>'
      
+    def __str__(self):
+        return f'<Contact {self.last_name}, {self.first_name}>'
