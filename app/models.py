@@ -11,10 +11,10 @@ class User(db.Model):
     contacts = db.relationship('Contact', backref='owner', lazy='dynamic')
 
     def __repr__(self):
-        return f'<Contact {self.last_name}, {self.first_name}>'
+        return f'<Contact id={self.id}, name={self.last_name}, {self.first_name}>'
     
     def __str__(self):
-        return f'<Contact {self.last_name}, {self.first_name}>'
+        return f'<Contact id={self.id}, name={self.last_name}, {self.first_name}>'
 
 
 class Contact(db.Model):
@@ -29,10 +29,10 @@ class Contact(db.Model):
     notes = db.Column(db.String(5000))
 
     def __repr__(self):
-        return f'<Contact {self.last_name}, {self.first_name}>'
-     
+        return f'<Contact id={self.id}, name={self.last_name}, {self.first_name}>'
+    
     def __str__(self):
-        return f'<Contact {self.last_name}, {self.first_name}>'
+        return f'<Contact id={self.id}, name={self.last_name}, {self.first_name}>'
 
 
 class Meeting(db.Model):

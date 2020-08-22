@@ -16,5 +16,8 @@ from app import routes, models
 # from app.api import bp as api_bp
 # app.register_blueprint(api_bp)
 
-from app.resources import ContactResource
-api.add_resource(ContactResource, '/contact')
+from app.resources.contact_resource import ContactResourceList
+api.add_resource(ContactResourceList, '/contact')
+
+from app.resources.contact_resource import ContactResource
+api.add_resource(ContactResource, '/contact/<contact_id>')
