@@ -5,5 +5,7 @@ from app.models import Contact
 
 class ContactResource(Resource):
     def get(self):
-        return 'yup'
-        # return json.dumps(Contact.query.all())
+        # return 'yup'
+        return {'data': str(Contact.query.all())}
+
+    def post(self):
