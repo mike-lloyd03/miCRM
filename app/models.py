@@ -23,7 +23,7 @@ class Contact(db.Model):
     first_name = db.Column(db.String(120), index=True)
     last_name = db.Column(db.String(120), index=True)
     business = db.Column(db.String(240))
-    phone_number = db.Column(db.Integer)
+    phone_number = db.Column(db.String(10))
     email = db.Column(db.String(120))
     client_type = db.Column(db.String(240))
     notes = db.Column(db.String(5000))
