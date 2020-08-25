@@ -4,19 +4,18 @@ from flask_restful import Resource, abort, reqparse
 from app import db
 from app.models import Contact
 
-put_args = reqparse.RequestParser()
-put_args.add_argument('first_name', type=str)
-put_args.add_argument('last_name', type=str)
-put_args.add_argument('business', type=str)
-put_args.add_argument('phone_number', type=str)
-put_args.add_argument('email', type=str)
-put_args.add_argument('client_type', type=str)
-put_args.add_argument('notes', type=str)
+post_args = reqparse.RequestParser()
+post_args.add_argument('first_name', type=str)
+post_args.add_argument('last_name', type=str)
+post_args.add_argument('business', type=str)
+post_args.add_argument('phone_number', type=str)
+post_args.add_argument('email', type=str)
+post_args.add_argument('client_type', type=str)
+post_args.add_argument('notes', type=str)
 
 
 def abort_if_no_contact(contact):
     if not contact:
-        print('not found')
         abort(404, message='Contact not found')
 
 class ContactResource(Resource):
@@ -37,6 +36,23 @@ class ContactResource(Resource):
     def put(self, contact_id):
         contact = Contact.query.filter_by(id=contact_id).first()
         abort_if_no_contact(contact)
+        print(type(post_args.parse_args()))
+        args = post_args.parse_args()
+        for arg in args:
+            if args[arg]:
+                contact[arg] = args[arg]
+        return {
+            'id': contact.id,
+            'first_name': contact.first_name,
+            'last_name': contact.last_name,
+            'business': contact.business,
+            'phone_number': contact.phone_number,
+            'email': contact.email,
+            'client_type': contact.client_type,
+            'notes': contact.notes
+        }
+
+
 
     def delete(self, contact_id):
         contact = Contact.query.filter_by(id=contact_id).first()
@@ -50,7 +66,7 @@ class ContactResourceList(Resource):
         return {'data': str(Contact.query.all())}
 
     def post(self):
-        args = put_args.parse_args()
+        args = post_args.parse_args()
         new_contact = Contact(
             first_name=args['first_name'],
             last_name=args['last_name'],
