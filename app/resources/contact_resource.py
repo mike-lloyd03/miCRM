@@ -63,7 +63,12 @@ class ContactResource(Resource):
 
 class ContactResourceList(Resource):
     def get(self):
-        return {'data': str(Contact.query.all())}
+        contacts = Contact.query.all()
+        data = [vars(c) for c in contacts]
+        for d in data:
+            del d['_sa_instance_state']
+        print(data)
+        return {'data': data}
 
     def post(self):
         args = post_args.parse_args()

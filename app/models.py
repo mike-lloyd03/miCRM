@@ -30,6 +30,16 @@ class Contact(db.Model):
 
     def __repr__(self):
         return f'<Contact id={self.id}, name={self.last_name}, {self.first_name}>'
+        # return str({
+        #     "id": self.id,
+        #     "first_name": self.first_name,
+        #     "last_name": self.last_name,
+        #     "business": self.business,
+        #     "phone_number": self.phone_number,
+        #     "email": self.email,
+        #     "client_type": self.client_type,
+        #     "notes": self.notes
+        # })
     
     def __str__(self):
         return f'<Contact id={self.id}, name={self.last_name}, {self.first_name}>'
